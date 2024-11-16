@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frasi Motivazionali</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #frase {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #333;
+        }
+        #bottone {
+            background-color: #ff7f50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #bottone:hover {
+            background-color: #e06c3b;
+        }
+    </style>
+</head>
+<body>
+    <div id="frase">Clicca per iniziare la giornata con una frase motivazionale!</div>
+    <button id="bottone" onclick="generaFrase()">Ne voglio un'altra</button>
+
+    <script>
+        const frasi = [
+            "Il buongiorno si vede dalla quantità di bestemmie che hai tirato finora",
+            "Gli incubi di stanotte non sono nulla in confronto a quello che ti aspetterà oggi",
+            "Se hai aperto il calendario hai già fatto molto, puoi tornare a dormire",
+            "Sappiamo che non hai rifatto il letto! (E va bene così)",
+            "Buongiornissimo Kaffeeee111",
+            "Ti auguriamo una giornata molto carina",
+            "Sorridi alla vita che la vita ti inbula (ma c’è pesci rossi con te <3)",
+            "Cambia la federa più spesso se vuoi migliorare la pelle del tuo viso :)",
+            "Oggi prova a fare qualcosa che non hai mai fatto prima! (Essere felice va bene)",
+            "Se hai tempo stamattina fatti una colazione figa, te la meriti (stiamo pensando a avena, mirtilli, miele e simili)",
+            "Non perdere tempo a scrollare pls :(",
+            "Oggi è il giorno giusto per quella cosa che continui a rimandareee daje",
+            "La parola di oggi è agrifotovoltaico: la tecnologia dell’energia solare ma in verticale tra i filari per non occupare gli spazi delle coltivazioni",
+            "Aggiorna il cv che non si sa mai",
+            "Buongiorno se ti sei lavatə i denti ieri! Altrimenti, cattivo giorno",
+            "I topi non avevano nipoti (ora leggilo al contrario)",
+            "Oof, che anno lungo che è stato questa settimana",
+            "Meglio maiale che fascista",
+            "Spera per il meglio, preparati per il peggio!",
+            "Oggi è la giornata giusta per mettere auella cosa nel retro del tuo armadio",
+            "Se è il tuo compleanno, Buon compleanno!",
+            "Qual è il tuo proposito per oggi? Non cagarti addosso? Uuuuuh mi piace, ambizioso",
+            "Oggi scoprirai definitivamente se sei intollerante al glutine, ma non ti dico come",
+            "La parola di oggi è: DESUETO. Fuori moda, obsoleto, superato.",
+            "Prendi una felpetta che non si sa mai",
+            "Perché oggi non provi ad andare avanti con quel libro che hai messo da parte?",
+            "È L’ORA DELLO SBUSTO È L’ORA DEL PACCHETTO",
+            "Noi siamo Marta, Chicco e Maddalena e siamo felici che tu ti sia svegliat* stamattina",
+            "Questa frase è stata scritta personalmente da Chicco e vuole dirti: oggi ce la puoi fare",
+            "Buongiorno luce dei miei occhi, oggi ti voglio felice di vivere",
+            "Lavati i denti",
+            "Se leggi questa frase in inverno, vestiti a cipolla, se la leggi in estate, a rapa",
+            "Sfida di oggi: sorridere a tutte le persone che incontri",
+            "Camminare per trenta minuti potrebbe aiutarti con la salute mentale (o forse no, sono pur sempre una frase su di un calendario)",
+            "Oggi sei Britney Spears",
+            "Challenge di oggi: stai dritto/a con la schiena",
+            "Scrivi su di un pezzo di carta una cosa che vuoi fare prima della fine dell’anno e poi buttalo, tanto non interessa a nessuno",
+            "Preferisci Pesci Rossi o Pesci Grossi? Scrivicelo in un dm che ci fa felici",
+            "Challenge di oggi: metti like a una persona a caso",
+            "Se trovi una rana in giro sei fortunato",
+            "Parola del giorno: balaustra. Scrivilo alla prima persona che vuoi tanto mica ti controllo",
+            "Gna omo vestiti tutto di un colore e ricrea l’outfit giornaliero di Chicco in seconda superiore",
+            "Sfida del giorno: dire di no a un lavoro sottopagato",
+            "Gesù ti vede",
+            "Non mi piacciono i furby",
+            "Compra un biglietto per un concerto random",
+            "È Maddalena…la BALENA BUONA CHE 🐋",
+            "Conosci Bryan? È un sogno...",
+            "Bevi un bicchiere d’acqua, sei un’icona di idratazione.",
+            "Cammina 30 minuti, ti sentirai tipo atleta olimpico.",
+            "Fai una cosa per te, solo perché puoi.",
+            "Respira. Non è solo per yoga, è per vivere.",
+            "Sorridi, confonderai chi ti vede.",
+            "Oggi, prova a non dire “non posso”.",
+            "Guarda il cielo, perché no?",
+            "Fai colazione come se fosse un brunch di lusso.",
+            "Scrivi un pensiero bello su un post-it e attaccalo dove lo vedi.",
+            "Siediti dritto, il tuo futuro te lo ringrazierà.",
+            "Prova a non scrollare per 5 minuti. Sfida accettata?",
+            "Regala un complimento a qualcuno, random.",
+            "Metti su la tua canzone power e balla da solo.",
+            "Respira profondamente, il drama può aspettare.",
+            "Prendi un libro e leggi una pagina. Solo una.",
+            "Lascia andare quel pensiero noioso, non ne vale la pena.",
+            "Oggi, una coccola extra per te stesso.",
+            "Prova qualcosa di nuovo per pranzo, vai fuori menu.",
+            "Prendi aria fresca, anche se sono 30 secondi.",
+            "Pianifica una cosa divertente per il weekend.",
+            "Scrivi i tuoi pensieri su un pezzo di carta, poi strappalo.",
+            "Metti il telefono giù e alza lo sguardo.",
+            "Ridi, anche se non c’è un motivo. Provalo.",
+            "Stendi i muscoli, anche se è solo per sbadigliare.",
+            "Fai pace con una piccola cosa oggi.",
+            "Ascolta un podcast che non conosci (Pesci Rossi?).",
+            "Canta, anche se sbagli tutte le note.",
+            "Prendi una pianta e parlagli. È la tua nuova confidente.",
+            "Prova a pensare a un ricordo felice, senti la differenza.",
+            "Chiudi gli occhi per un minuto e sogna a occhi aperti.",
+            "Metti via quella mail. Respira.",
+            "Sii gentile con te stesso come lo sei con gli altri.",
+            "Cammina senza meta e conta quante cose strane vedi.",
+            "Scrivi un messaggio carino a un amico.",
+            "Bevi una tazza di tè e ascolta il silenzio.",
+            "Stacca dal lavoro per un minuto. Nessun disastro.",
+            "Ricorda: oggi hai già fatto più di quanto pensi.",
+            "Guarda un video divertente. Risata bonus.",
+            "Prova a non lamentarti per un’ora. Sfida.",
+            "Dormi 8 ore stanotte. Magia pura.",
+            "Stendi un pezzo di carta e scrivi tre cose belle di oggi.",
+            "Cucina qualcosa senza motivo, solo per il profumo.",
+            "Abbraccia chi ti sta vicino, fisicamente o virtualmente.",
+            "Mangia qualcosa di colorato.",
+            "Prova a vedere il lato ironico delle cose.",
+            "Spegni le notifiche, riprendi la tua pace.",
+            "Datti una pausa, sei umano, non un robot.",
+            "Parla con qualcuno che non senti da tempo.",
+            "Lascia che il sole ti tocchi la faccia."
+        ];
+
+        function generaFrase
