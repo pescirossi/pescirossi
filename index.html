@@ -15,98 +15,821 @@
             margin: 0;
             background-color: #fff;
             text-align: center;
-            padding: 20px; /* Spazio ai bordi per dispositivi mobili */
+            padding: 20px;
             box-sizing: border-box;
         }
         .container {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            max-width: 600px;
-            width: 100%; /* Adattabilità ai dispositivi mobili */
+            align-items: center;
         }
-        #phrase {
+        .quote {
             font-size: 1.5em;
             margin-bottom: 20px;
-            word-wrap: break-word;
         }
-        button {
-            background-color: #FFA500; /* Arancione */
+        .button {
+            font-size: 1em;
+            font-weight: 600;
+            padding: 10px 20px;
+            background-color: #007BFF;
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            cursor: pointer;
             border-radius: 5px;
-            font-size: 1em;
+            cursor: pointer;
         }
-        button:hover {
-            background-color: #e69500;
+        .button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div id="phrase">Benvenuto! Clicca per vedere la tua frase del giorno.</div>
-        <button onclick="generatePhrase()">ne voglio un'altra</button>
+        <div class="quote" id="quote">Caricamento...</div>
+        <button class="button" onclick="getRandomQuote()">Ne voglio un'altra!</button>
     </div>
-
     <script>
-        const phrases = [
-            "Il buongiorno si vede dalla quantità di bestemmie che hai tirato finora",
-            "Gli incubi di stanotte non sono nulla in confronto a quello che ti aspetterà oggi",
-            "Se hai aperto il calendario hai già fatto molto, puoi tornare a dormire",
-            "Sappiamo che non hai rifatto il letto! (E va bene così)",
-            "Buongiornissimo Kaffeeee111",
-            "Ti auguriamo una giornata molto carina",
-            "Sorridi alla vita che la vita ti inbula (ma c’è pesci rossi con te <3)",
-            "Cambia la federa più spesso se vuoi migliorare la pelle del tuo viso :)",
-            "Oggi prova a fare qualcosa che non hai mai fatto prima! (Essere felice va bene)",
-            "Se hai tempo stamattina fatti una colazione figa, te la meriti (stiamo pensando a avena, mirtilli, miele e simili)",
-            "Non perdere tempo a scrollare pls :(",
-            "Oggi è il giorno giusto per quella cosa che continui a rimandareee daje",
-            "La parola di oggi è agrifotovoltaico: la tecnologia dell’energia solare ma in verticale tra i filari per non occupare gli spazi delle coltivazioni",
-            "Aggiorna il cv che non si sa mai",
-            "Buongiorno se ti sei lavatə i denti ieri! Altrimenti, cattivo giorno",
-            "I topi non avevano nipoti (ora leggilo al contrario)",
-            "Oof, che anno lungo che è stato questa settimana",
-            "Meglio maiale che fascista",
-            "Spera per il meglio, preparati per il peggio!",
-            "Oggi è la giornata giusta per mettere quella cosa nel retro del tuo armadio",
-            "Se è il tuo compleanno, Buon compleanno!",
-            "Qual è il tuo proposito per oggi? Non cagarti addosso? Uuuuuh mi piace, ambizioso",
-            "Oggi scoprirai definitivamente se sei intollerante al glutine, ma non ti dico come",
-            "La parola di oggi è: DESUETO. Fuori moda, obsoleto, superato.",
-            "Prendi una felpetta che non si sa mai",
-            "Perché oggi non provi ad andare avanti con quel libro che hai messo da parte?",
-            "È L’ORA DELLO SBUSTO È L’ORA DEL PACCHETTO",
-            "Noi siamo Marta, Chicco e Maddalena e siamo felici che tu ti sia svegliat* stamattina",
-            "Questa frase è stata scritta personalmente da Chicco e vuole dirti: oggi ce la puoi fare",
-            "Buongiorno luce dei miei occhi, oggi ti voglio felice di vivere",
-            "Lavati i denti",
-            "Se leggi questa frase in inverno, vestiti a cipolla, se la leggi in estate, a rapa",
-            "Sfida di oggi: sorridere a tutte le persone che incontri",
-            "Camminare per trenta minuti potrebbe aiutarti con la salute mentale (o forse no, sono pur sempre una frase su di un calendario)",
-            "Oggi sei Britney Spears",
-            "Challenge di oggi: stai dritto/a con la schiena",
-            "Scrivi su di un pezzo di carta una cosa che vuoi fare prima della fine dell’anno e poi buttalo, tanto non interessa a nessuno",
-            "Preferisci Pesci Rossi o Pesci Grossi? Scrivicelo in un dm che ci fa felici",
-            "Challenge di oggi: metti like a una persona a caso",
-            "Se trovi una rana in giro sei fortunato",
-            "Parola del giorno: balaustra. Scrivilo alla prima persona che vuoi tanto mica ti controllo",
-            "Gna omo vestiti tutto di un colore e ricrea l’outfit giornaliero di Chicco in seconda superiore",
-            "Sfida del giorno: dire di no a un lavoro sottopagato",
-            "Gesù ti vede",
-            "Non mi piacciono i furby",
-            "Compra un biglietto per un concerto random",
-            "È Maddalena…la BALENA BUONA CHE 🐋",
-            "Conosci Bryan? È un sogno..."
+        const quotes = [
+           1/365 Se hai aperto il calendario hai già fatto molto, puoi tornare a dormire
+
+2/365 Zefiro, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+3/365 Bastaaa prché abbiamo deciso di arrivare da 365??? MA BASTAAAA ABBIATE PIETÀ
+
+4/365 Lampo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+5/365 Oggi ti dedico questa canzone: False God (Taylor Swift)
+
+6/365 Ogni tanto, è meglio smettere di pensare e fare qualcosa di completamente diverso.
+
+7/365 Buongiorno se ti sei lavatə i denti ieri! Altrimenti, cattivo giorno
+
+8/365 Zefiro, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+9/365 Boschetto, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+10/365 Oggi ti dedico questa canzone: The Lakes (Taylor Swift)
+
+11/365 Oggi ti dedico questa canzone: You Need To Calm Down (Taylor Swift)
+
+12/365 Scrivi su di un pezzo di carta una cosa che vuoi fare prima della fine dell’anno e poi buttalo, tanto non interessa a nessuno
+
+13/365 La pizza margherita prende il nome dalla Regina Margherita di Savoia, per i suoi colori che richiamano la bandiera italiana: verde (basilico), bianco (mozzarella), rosso (pomodoro).
+
+14/365 Non guardare l’orologio. O meglio, fallo solo se è carino.
+
+15/365 Sorridi alla vita che la vita ti inbula (ma c’è pesci rossi con te <3)
+
+16/365 Oggi ti dedico questa canzone: Teenage Dream (Katy Perry)
+
+17/365 Esistono pesci che possono camminare sull’acqua.
+
+18/365 Oggi ti dedico questa canzone: Flowers (Sabrina Carpenter)
+
+19/365 Fulvo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+20/365 Dardo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+21/365 se fossi un animale, che animale saresti? Scrivicelo in un dm poi ti rispondiamo a cazzo cane
+
+22/365 Miele, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+23/365 Ciclamino, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+24/365 I canguri non possono camminare all’indietro.
+
+25/365 Lavati i denti
+
+26/365 Oggi ti dedico questa canzone: I’m That Chick (Sabrina Carpenter)
+
+27/365 Oggi ti dedico questa canzone: All In My Head (Gracie Abrams)
+
+28/365 Il miele di manuka è prodotto dalle api che si nutrono dei fiori dell’albero di manuka, originario della Nuova Zelanda, ed è noto per le sue proprietà medicinali.
+
+29/365 Il pezzo di poesia di oggi è: “La luna non dice mai addio, anche quando scompare.” - Pablo Neruda
+
+30/365 Gli esseri umani condividono circa il 60% del loro DNA con le banane.
+
+31/365 Le banane sono bacche, mentre le fragole non lo sono! Botanicamente, le banane appartengono alla famiglia delle bacche, mentre le fragole sono considerate frutti aggregati.
+
+32/365 Le tartarughe marine possono navigare per migliaia di chilometri usando il campo magnetico terrestre.
+
+33/365 Non avere paura di fare una mossa che ti fa sentire un po’ fuori posto.
+
+34/365 se fossi una tisana che tisana saresti? Nel dubbio bevine una
+
+35/365 NO.
+
+36/365 Il pezzo di poesia di oggi è: “La vita è un fiume che non si può fermare.” - Langston Hughes
+
+37/365 Il più grande deserto del mondo non è il Sahara, ma l’Antartide, che è considerato un deserto di ghiaccio.
+
+38/365 Oggi prova a fare qualcosa che non hai mai fatto prima! (Essere felice va bene)
+
+39/365 Le farfalle hanno il gusto sui piedi.
+
+40/365 Mai fidarti di un gatto con lo sguardo troppo intenso.
+
+41/365 Aggiorna il cv che non si sa mai
+
+42/365 Gesù ti vede
+
+43/365 Il pezzo di poesia di oggi è: “I sogni sono la poesia della vita.” - William Shakespeare
+
+44/365 Falena, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+45/365 Le giraffe non hanno corde vocali, quindi non emettono suoni udibili.
+
+46/365 Oggi fai un complimento a uno sconosciuto, ma solo se ti va.
+
+47/365 Quando tutto sembra andare storto, ricorda che anche il giorno più nero finisce.
+
+48/365 Le stelle marine non hanno cervello, ma un sistema nervoso centrale che controlla il corpo.
+
+49/365 Lustrino, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+50/365 Filigrana, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+51/365 Oggi ti dedico questa canzone: In My Head (Ariana Grande)
+
+52/365 Amorevole, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+53/365 Dovrei farlo? Devi chiederlo allo Zio Paolo
+
+54/365 Non lasciare che la tua giornata sia piatta. Fai qualcosa di curva.
+
+55/365 Petalo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+56/365 Il pezzo di poesia di oggi è: “Ogni passo che fai è una piccola rivoluzione.” - Maya Angelou
+57/365 Rosmarino, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+58/365 Oggi ti dedico questa canzone: I Want You to Stay (Chappell Roan)
+
+59/365 Oggi è la giornata giusta per mettere quella cosa nel retro del tuo armadio
+
+60/365 Oof, che anno lungo che è stato questa settimana
+
+61/365 La parola di oggi è: DESUETO. Fuori moda, obsoleto, superato.
+
+62/365 Non c’è fretta di trovare tutte le risposte, prendi il tempo che ti serve.
+
+63/365 Oggi ti dedico questa canzone: Boys (Charli XCX)
+
+64/365 SÌ
+
+65/365 Sogno, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+66/365 Il pezzo di poesia di oggi è: “La vita è fatta di piccole cose, come le foglie che cadono lentamente.” - John Keats
+
+67/365 Le ostriche possono cambiare sesso durante la loro vita.
+
+68/365 Occhio per occhio, dente per dente…
+
+69/365 Il cielo è blu per un motivo. Trovalo e poi torna qui.
+
+70/365 Cadenza, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+71/365 Preferisci Pesci Rossi o Pesci Grossi? Scrivicelo in un dm che ci fa felici
+
+72/365 Fiocco, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+73/365 Oggi è il giorno giusto per quella cosa che continui a rimandareee daje
+
+74/365 Il nome “Google” deriva da un errore di scrittura di “googol”, un termine matematico che rappresenta il numero 1 seguito da 100 zeri.
+
+75/365 Selva, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+76/365 Effluvio, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+77/365 Ricorda: anche le piastrelle del bagno meritano rispetto.
+
+78/365 Pescatore, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+79/365 Vapore, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+80/365 Ninnolo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+81/365 Sfida di oggi: sorridere a tutte le persone che incontri
+
+82/365 Piumaggio, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+83/365 Non importa quanto tempo ci metti a trovare la tua strada, l’importante è non fermarsi.
+
+84/365 Incenso, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+85/365 Non è un giorno qualsiasi: è il giorno in cui hai letto questa frase.
+
+86/365 Oggi ti dedico questa canzone: Breakup Song (Little Mix)
+
+87/365 Fiore, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+88/365 Luminaria, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+89/365 Se non sai cosa fare, prova qualcosa che non hai mai fatto.
+
+90/365 Oggi ti dedico questa canzone: I Wish You Were Sober (Gracie Abrams)
+
+91/365 Sibilla, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+92/365 Se trovi una rana in giro sei fortunato
+
+93/365 Tulle, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+94/365 Oggi ti dedico questa canzone: 22 (Taylor Swift)
+
+95/365 Quando ti senti perso, cerca di fare una cosa che ti faccia sentire in controllo.
+
+96/365 Gna omo vestiti tutto di un colore e ricrea l’outfit giornaliero di Chicco in seconda superiore
+
+97/365 Ti auguriamo una giornata molto carina
+
+98/365 Compra un biglietto per un concerto random
+
+99/365 Oggi ti dedico questa canzone: August (Taylor Swift)
+
+100/365 La luna non giudica, quindi non farlo neanche tu.
+
+101/365 Oggi ti dedico questa canzone: Sour (Olivia Rodrigo)
+
+102/365 Questa frase è stata scritta personalmente da Chicco e vuole dirti: oggi ce la puoi fare
+
+103/365 Ogni passo che fai ti avvicina al risultato che cerchi.
+
+104/365 Palco, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+105/365 Le patate erano usate come moneta in alcuni paesi del Sud America prima dell’arrivo degli europei.
+
+106/365 Oggi ti dedico questa canzone: Runaway (Aurora)
+
+107/365 Mandala, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+108/365 Cirmolo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+109/365 Intreccio, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+110/365 Le cose che ti preoccupano oggi probabilmente non saranno importanti domani.
+
+111/365 Il pezzo di poesia di oggi è: “Ogni fiore che nasce è il sorriso del mondo.” - Emily Dickinson
+
+112/365 Qual è il tuo proposito per oggi? Non cagarti addosso? Uuuuuh mi piace, ambizioso
+
+113/365 Un giorno su Venere è più lungo di un anno su Venere. Un giorno su questo pianeta dura circa 243 giorni terrestri, mentre un anno su Venere dura 225 giorni terrestri.
+
+114/365 L’oggetto più costoso mai venduto è un’opera d’arte di Leonardo da Vinci, “Salvator Mundi”, venduta per 450 milioni di dollari nel 2017.
+
+115/365 Non giudicarti troppo severamente, nessuno ha la vita perfetta.
+
+116/365 Oggi prova a parlare come un personaggio di Star Wars. Forse aiuta.
+
+117/365 Cammina come se avessi appena trovato 5 euro. Con fierezza.
+
+118/365 Giunchiglia, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+119/365 Se trovi una calza spaiata, falle un applauso per essere rimasta.
+
+120/365 Oggi ti dedico questa canzone: I Really Like You (Carly Rae Jepsen)
+
+121/365 Stai leggendo questa frase. Quindi qualcosa l’hai fatto.
+
+122/365 Un errore oggi è solo una lezione per domani.
+
+123/365 Frescura, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+124/365 L’odore del pavimento appena lavato è causato dalla combinazione di acido lattico e acido acetico che si trova nel sapone.
+
+125/365 Maddalena vuole che scriva un consiglio sul bruciacchiare le verdure ma io non voglio perché è cancerogeno ciao
+
+126/365 Oggi ti dedico questa canzone: No Tears Left to Cry (Ariana Grande)
+
+127/365 Aurea, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+128/365 Il salmone può nuotare controcorrente risalendo fiumi.
+
+129/365 Le formiche non dormono mai.
+
+130/365 La tua missione oggi: cercare un ananas e salutarlo educatamente.
+
+131/365 Nebbia, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+132/365 Se ti sembra tutto assurdo, è perché lo è.
+
+133/365 Le mucche hanno amici e possono diventare stressate quando sono separati dai loro compagni.
+
+134/365 La plastica può impiegare fino a 1.000 anni per degradarsi completamente.
+
+135/365 Nebuloso, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+136/365 Gli incubi di stanotte non sono nulla in confronto a quello che ti aspetterà oggi
+
+137/365 La parola del giorno è: criceto. Usala in una conversazione importante.
+
+138/365 Oggi è un ottimo giorno per perdere tempo con stile.
+
+139/365 Oggi ti dedico questa canzone: Out of the Woods (Taylor Swift)
+
+140/365 Non tutto ha bisogno di essere perfetto per essere valido.
+
+141/365 Buongiornissimo Kaffeeee111
+
+142/365 Cosa mangeresti se oggi fosse il tuo ultimo giorno? Fai pratica.
+
+143/365 Le api hanno cinque occhi: due composti e tre semplici.
+
+144/365 Oggi ti dedico questa canzone: Don’t Look Up (Gracie Abrams)
+
+145/365 Oggi ti dedico questa canzone: Came Out Swinging (Chappell Roan)
+
+146/365 Oggi il tuo mantra è: posso farcela (forse).
+
+147/365 I cavalli non possono vomitare. La loro anatomia impedisce che ciò accada, motivo per cui devono essere monitorati quando mangiano troppo.
+
+148/365 La velocità massima di un ghepardo può superare i 100 km/h.
+
+149/365 Oggi ti dedico questa canzone: King Princess (1950)
+
+150/365 Sete, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+151/365 Il pezzo di poesia di oggi è: “Anche le ombre danzano sotto la luce del sole.” - Rumi
+
+152/365 Incanto, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+153/365 Oggi ti dedico questa canzone: All Too Well (Taylor Swift)
+
+154/365 Oggi ti dedico questa canzone: Heaven (Gracie Abrams)
+
+155/365 Le carote erano originariamente viola. Le carote arancioni sono state sviluppate nei Paesi Bassi nel 17° secolo come tributo alla famiglia reale.
+
+156/365 Fai attenzione alle porte. Non tutte si aprono spingendo.
+
+157/365 Se piove, bagnati. Se non piove, bagnati lo stesso. Perché no?
+
+158/365 Non aver paura di cambiare idea, la crescita parte da lì.
+
+159/365 Non esistono cattive idee, solo pessime esecuzioni. Vai sereno!
+
+160/365 Buongiorno luce dei miei occhi, oggi ti voglio felice di vivere
+
+161/365 Oggi ti dedico questa canzone: Champagne Problems (Taylor Swift)
+
+162/365 Ginestra, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+163/365 Corimbo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+164/365 Oggi ti dedico questa canzone: Sick of It (Chappell Roan)
+
+165/365 Non sottovalutare mai l’impatto che può avere una buona conversazione.
+
+166/365 Fagotto, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+167/365 Balsamo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+168/365 Il pezzo di poesia di oggi è: “Il cuore è una terra misteriosa, dove fioriscono i sogni.” - Sylvia Plath
+
+169/365 sei bellissimo uao
+
+170/365 A volte, semplicemente dormire bene è la chiave per un buon giorno.
+
+171/365 Il miele non scade mai. Grazie alla sua composizione chimica, può essere conservato per millenni senza deteriorarsi, come è stato scoperto in alcune tombe egizie.
+
+172/365 Oggi evita i guai. Oppure insegnali a ballare.
+
+173/365 oh bene bene, eccoti qui. Oggi cambierai la tua vita me lo sento!
+
+174/365 Tintura, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+175/365 Mirto, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+176/365 Challenge di oggi: stai dritto/a con la schiena
+
+177/365 La Terra non è una sfera perfetta: è più simile a un ellissoide leggermente schiacciato.
+
+178/365 Carezza, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+179/365 Tasso, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+180/365 Oggi ti dedico questa canzone: All I Want (Olivia Rodrigo)
+
+181/365 Se oggi non ci capisci niente, sappi che è reciproco.
+
+182/365 Impara a ridere delle piccole cose, ti aiuterà a vedere il quadro generale.
+
+183/365 Oggi ti dedico questa canzone: Boys Like You (Chappell Roan)
+
+184/365 Oggi ti dedico questa canzone: Why Not Me (Gracie Abrams)
+
+185/365 La giornata è come un puzzle. Fai attenzione a non perdere i pezzi.
+
+186/365 A volte l’unica cosa che serve è chiedere aiuto.
+
+187/365 Oggi ti dedico questa canzone: Pillow Queen (Gracie Abrams)
+
+188/365 Essenza, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+189/365 Ombelico, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+190/365 Il legno di pino è la più antica sostanza organica sulla Terra, ed è stato trovato in alberi di 2.000 anni.
+
+191/365 Oggi ti dedico questa canzone: Karma (Taylor Swift)
+
+192/365 Se hai freddo, abbraccia una tazza di tè caldo. Non ti giudicherà.
+
+193/365 Un giorno senza risate è un giorno sprecato. Ma anche senza biscotti.
+
+194/365 Prendi una felpetta che non si sa mai
+
+195/365 Fare questo calendario ci ha cavato la vita, spero ti stiano piacendo queste frasi
+
+196/365 C’è sempre tempo per un panino.
+
+197/365 Arazzo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+198/365 Oggi ti dedico questa canzone: She Looks So Perfect (5 Seconds of Summer)
+
+199/365 Nebulosa, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+200/365 Volta, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+201/365 Mormorio, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+202/365 Se un semaforo è verde, attraversa. Se è rosso… pensa al verde.
+
+203/365 La vita è come un frullato. Fai attenzione a non ingoiare il cucchiaiono.
+
+204/365 La luna è in grado di allontanarsi dalla Terra di circa 3,8 cm all’anno.
+
+205/365 Il pezzo di poesia di oggi è: “L’amore è un fiore che cresce anche nelle notti più buie.” - William Blake
+
+206/365 Chiostro, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+207/365 Oggi ti dedico questa canzone: How to Save a Life (The Fray)
+
+208/365 Cambia la federa più spesso se vuoi migliorare la pelle del tuo viso :)
+
+209/365 Oggi scoprirai definitivamente se sei intollerante al glutine, ma non ti dico come
+
+210/365 Oggi ti dedico questa canzone: Mirror (Sabrina Carpenter)
+
+211/365 Conosci Bryan? È un sogno…
+
+212/365 Se ti chiedono ‘come stai?’ rispondi con un numero casuale.
+
+213/365 Il cuore di una balena azzurra pesa circa 600 chili.
+
+214/365 Fai una pausa quando ti senti sopraffatto, respira e ricomincia.
+
+215/365 Rondine, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+216/365 Giunco, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+217/365 Ogni nuvola ha un bordo argenteo. Se lo trovi, vendilo.
+
+218/365 Non mi piacciono i furby
+
+219/365 Hai mai notato che i piccioni non vanno mai di fretta? Prendi esempio.
+
+220/365 Oggi ti dedico questa canzone: Good 4 U (Olivia Rodrigo)
+
+221/365 OGGI NON SPENDERE SOLDI!!! Ti prego!
+
+222/365 Non perdere tempo a scrollare pls :(
+
+223/365 Meglio maiale che fascista
+
+224/365 Lira, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+225/365 La lingua più parlata al mondo è il mandarino.
+
+226/365 Anche le giornate peggiori passano, non sono permanenti.
+
+227/365 Il pezzo di poesia di oggi è: “Tutto è tempesta prima di essere calma.” - Hermann Hesse
+
+228/365 Oggi ti dedico questa canzone: Bang Bang (Jessie J, Ariana Grande, Nicki Minaj)
+
+229/365 Rugiada, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+230/365 Oggi ti dedico questa canzone: Falling (Harry Styles)
+
+231/365 oggi Luigi Mangione è un eroe nazionale, nel giorno in cui lo leggi che fine ha fatto?
+
+232/365 Camminare per trenta minuti potrebbe aiutarti con la salute mentale (o forse no, sono pur sempre una frase su di un calendario)
+
+233/365 Oggi ti dedico questa canzone: Get Over You (Sabrina Carpenter)
+
+234/365 Oggi ti dedico questa canzone: Don’t Blame Me (Taylor Swift)
+
+235/365 Se la vita ti mette alla prova, rispondi con pazienza e determinazione.
+
+236/365 Il colibrì è l’unico uccello che può volare all’indietro. Le sue ali possono battere fino a 80 volte al secondo.
+
+237/365 È Maddalena…la BALENA BUONA CHE 🐋
+
+238/365 Calore, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+239/365 Se incontri una zebra oggi, falle sapere che hai notato il suo stile.
+
+240/365 Se la strada sembra lunga, prenditi un momento per fermarti e guardare quanto sei arrivato lontano.
+
+241/365 Ogni volta che cammini, lasci un’impronta. Quindi attenzione alle pozzanghere.
+
+242/365 Spera per il meglio, preparati per il peggio!
+
+243/365 Se hai una sedia, siediti. Se non hai una sedia, inventala.
+
+244/365 Viandante, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+245/365 La vita non è un film, e va bene così.
+
+246/365 I polpi hanno tre cuori.
+
+247/365 Oggi ti dedico questa canzone: God Is A Woman (Ariana Grande)
+
+248/365 Rugiada, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+249/365 Il pezzo di poesia di oggi è: “Io sono il vento che soffia nelle tue vene.” - Rainer Maria Rilke
+
+250/365 Gli occhi dei camaleonti si muovono separatamente. Possono guardare in direzioni opposte, permettendo loro di tenere d’occhio i predatori e le prede contemporaneamente.
+
+251/365 I canguri non possono camminare all’indietro. Le loro gambe sono progettate per saltare, non per camminare normalmente.
+
+252/365 evviva la vita :) scherz
+
+253/365 Velluto, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+254/365 Acquerello, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+255/365 Oggi non è venerdì. O forse sì, dipende da quando stai leggendo.
+
+256/365 Solecchio, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+257/365 Challenge di oggi: metti like a una persona a caso
+
+258/365 La lingua più lunga del mondo è quella della salamandra gigante giapponese, che può estendersi fino a tre volte la lunghezza del suo corpo!
+
+259/365 Gli elefanti sono gli unici animali che non possono saltare. Le loro gambe sono troppo corte e tozze per farli rimbalzare.
+
+260/365 Vento soffuso, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+261/365 Gli squali esistono da oltre 400 milioni di anni, più di qualsiasi altra specie.
+
+262/365 Chiara, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+263/365 Oggi sei Britney Spears
+
+264/365 Rugiada, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+265/365 Sfida del giorno: dire di no a un lavoro sottopagato
+
+266/365 Non prendere troppo sul serio i consigli degli altri, segui la tua strada.
+
+267/365 Ombrosa, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+268/365 Qualcuno da qualche parte oggi mangerà pizza. Perché non tu?
+
+269/365 Splendore, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+270/365 Scricciolo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+271/365 Non dimenticare che il sole esiste, anche se non lo vedi.
+
+272/365 prima delle 9 di mattina non si chiedono frasi, torna più tardi!
+
+273/365 Lanterna, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+274/365 Splendore, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+275/365 Vespera, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+276/365 Oggi ti dedico questa canzone: The 1 (Taylor Swift)
+
+277/365 Hai mai abbracciato un albero? Forse è ora di cominciare.
+
+278/365 Oggi ti dedico questa canzone: Love Affair (Chappell Roan)
+
+279/365 L’oceano copre circa il 71% della superficie terrestre, ma circa l’80% del nostro oceano è ancora inesplorato.
+
+280/365 Il punto più caldo della Terra è la Valle della Morte, in California, dove si sono registrati 56,7°C.
+
+281/365 Le giraffe hanno le stesse sette vertebre nel collo degli esseri umani, ma sono molto più lunghe.
+
+282/365 Marmo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+283/365 Lavati le mani dopo aver letto questa frase. Fidati.
+
+284/365 questa frase viene dal passato, precisamente dal 12 dicembre 2024, L’eras tour è appena finito e Chicco è molto triste. Ciao
+
+285/365 Ricorda che anche una forchetta è stata un cucchiaio ribelle.
+
+286/365 Cielo d’oro, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+287/365 Sella, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+288/365 Se è il tuo compleanno, Buon compleanno!
+
+289/365 Non puoi fallire se non ci provi. Ma neanche vincere.
+
+290/365 Borragine, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+291/365 Perché oggi non provi ad andare avanti con quel libro che hai messo da parte?
+
+292/365 Metti un adesivo su qualcosa oggi. È terapeutico.
+
+293/365 Selenio, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+294/365 Se leggi questa frase in inverno, vestiti a cipolla, se la leggi in estate, a rapa
+
+295/365 Maddalena oggi ti fa una domanda: sono venuti prima gli Assiri o i babilonesi? Io conosco solo i bibanesi
+
+296/365 Gli squali esistono da più di 400 milioni di anni, molto prima dei dinosauri!
+
+297/365 Anche i grandi errori ti insegnano qualcosa.
+
+298/365 Un “chiodo” non è un oggetto metallico: è la forma di una parte dell’anatomia di una pianta.
+
+299/365 Oggi ti dedico questa canzone: Into You (Ariana Grande)
+
+300/365 Cielo azzurro, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+301/365 Parola del giorno: balaustra. Scrivilo alla prima persona che vuoi tanto mica ti controllo
+
+302/365 La parola di oggi è agrifotovoltaico: la tecnologia dell’energia solare ma in verticale tra i filari per non occupare gli spazi delle coltivazioni
+
+303/365 Se oggi ti sembra difficile, cerca di fare una cosa che ti faccia sorridere.
+
+304/365 Bosco, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+305/365 Senti un profumo nell’aria? No? Allora cambia deodorante.
+
+306/365 Crespino, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+307/365 Gli esseri umani e le banane condividono circa il 60% del loro DNA.
+
+308/365 Un occhio umano può distinguere circa 10 milioni di colori.
+
+309/365 Ulivo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+310/365 Roccia, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+311/365 Zefiro, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+312/365 Oggi ti dedico questa canzone: Can’t Be Tamed (Miley Cyrus)
+
+313/365 Se trovi una moneta per terra, comprati un sogno (o un caffè).
+
+314/365 Mucchio, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+315/365 Un gruppo di gatti è chiamato “clowder”.
+
+316/365 Parnaso, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+317/365 Accento, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+318/365 Garofano, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+319/365 Le piante possono “sentire” il tatto. Alcune piante, come la mimosa pudica, reagiscono al tocco ripiegandosi su se stesse per proteggersi.
+
+320/365 Oggi ti dedico questa canzone: You Belong With Me (Taylor Swift)
+
+321/365 Un singolo seme di mela può crescere in un albero che produce frutti per tutta la vita.
+
+322/365 Violetta, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+323/365 Non aspettarti che tutto venga facilmente, ma non mollare mai.
+
+324/365 Stame, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+325/365 Oggi ti dedico questa canzone: Skinny Dipping (Ava Max)
+
+326/365 il lillino ha rotto i coglioni -Marta
+
+327/365 Sappiamo che non hai rifatto il letto! (E va bene così)
+
+328/365 ce la possiamo fareeeee
+
+329/365 La parola del giorno è: forbice. Ora vai e crea caos.
+
+330/365 Se senti un rumore strano, potrebbe essere la tua motivazione che crolla.
+
+331/365 Gli alberi non urlano mai. Pensa al perché.
+
+332/365 Lievito, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+333/365 Oggi ti dedico questa canzone: Good 4 U (Olivia Rodrigo)
+
+334/365 Le tartarughe possono vivere per più di 100 anni, alcune delle specie più longeve possono vivere anche oltre i 150 anni.
+
+335/365 Oggi ti dedico questa canzone: Gimme More (Britney Spears)
+
+336/365 Le difficoltà sono solo una parte del gioco, non l’intero gioco.
+
+337/365 I cammelli hanno tre palpebre per proteggere i loro occhi dalla sabbia.
+
+338/365 I camaleonti non cambiano colore per mimetizzarsi, ma per comunicare o per regolare la temperatura corporea.
+
+339/365 Il punto più basso della Terra è la Fossa delle Marianne, che si trova a circa 11.000 metri sotto il livello del mare.
+
+340/365 Ricorda che ogni giorno è una nuova opportunità per fare qualcosa di diverso.
+
+341/365 Non arrenderti mai, perché la prossima mossa potrebbe essere quella giusta.
+
+342/365 Sai qual è la cosa più bella del futuro? Non ci siamo ancora arrivati.
+
+343/365 Oggi ti dedico questa canzone: Sweetener (Ariana Grande)
+
+344/365 Noi siamo Marta, Chicco e Maddalena e siamo felici che tu ti sia svegliat* stamattina
+
+345/365 Ogni passo in avanti è un passo più vicino alla soluzione.
+
+346/365 Esalazione, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+347/365 Montagna, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+348/365 Lago, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+349/365 È L’ORA DELLO SBUSTO È L’ORA DEL PACCHETTO
+
+350/365 Fruscio, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+351/365 Il pezzo di poesia di oggi è: “E nel silenzio si nasconde il suono più vero.” - W.B. Yeats
+
+352/365 Riflesso, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+353/365 Se qualcuno ti dice che non puoi farcela, usa quel commento come carburante.
+
+354/365 Oggi pensa ai pinguini: sono eleganti, sempre.
+
+355/365 I topi non avevano nipoti (ora leggilo al contrario)
+
+356/365 Cristallo, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+357/365 Mandorla, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+358/365 Se hai tempo stamattina fatti una colazione figa, te la meriti (stiamo pensando a avena, mirtilli, miele e simili)
+
+359/365 Perla, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+360/365 Le piante comunicano tra di loro attraverso segnali chimici.
+
+361/365 Ombrosa, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+362/365 Oggi ti dedico questa canzone: Exile (Taylor Swift ft. Bon Iver)
+
+363/365 Lucciola, questa è la parola di oggi, prova a inserirla in un discorso a caso hehe
+
+364/365 Non seguire Pesci Rossi, nemmeno loro sanno dove stanno andando
+
         ];
 
-        function generatePhrase() {
-            const randomIndex = Math.floor(Math.random() * phrases.length);
-            document.getElementById('phrase').innerText = phrases[randomIndex];
+        function getQuoteFor2025() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const startOfYear = new Date("2025-01-01");
+            const endOfYear = new Date("2025-12-31");
+
+            // Prima del 2025
+            if (today < startOfYear) {
+                document.getElementById("quote").innerText = 
+                    "È ancora troppo presto, prima deve finire il 2024!";
+                return;
+            }
+
+            // Dopo il 2025
+            if (today > endOfYear) {
+                document.getElementById("quote").innerText = 
+                    "Grazie per aver trascorso il 2025 con noi! È stato un anno bellissimo e pieno di avventure (non lo sappiamo in realtà, stiamo scrivendo questo messaggio il 12 dicembre 2024). Ti vogliamo bene, sei grande!";
+                return;
+            }
+
+            // Durante il 2025
+            const dayOfYear = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24));
+            document.getElementById("quote").innerText = quotes[dayOfYear % quotes.length];
         }
+
+        // Funzione per mostrare una frase casuale
+        function getRandomQuote() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const startOfYear = new Date("2025-01-01");
+            const endOfYear = new Date("2025-12-31");
+
+            // Mostra messaggi specifici fuori dal 2025
+            if (today < startOfYear) {
+                document.getElementById("quote").innerText = 
+                    "È ancora troppo presto, prima deve finire il 2024!";
+                return;
+            }
+            if (today > endOfYear) {
+                document.getElementById("quote").innerText = 
+                    "Grazie per aver trascorso il 2025 con noi! È stato un anno bellissimo e pieno di avventure (non lo sappiamo in realtà, stiamo scrivendo questo messaggio il 12 dicembre 2024). Ti vogliamo bene, sei grande!";
+                return;
+            }
+
+            // Mostra una frase casuale solo durante il 2025
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById("quote").innerText = quotes[randomIndex];
+        }
+
+        // Mostra la frase iniziale al caricamento della pagina
+        getQuoteFor2025();
     </script>
 </body>
 </html>
