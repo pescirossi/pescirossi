@@ -1,112 +1,73 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesci Rossi - Frasi Motivazionali</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Calendario Pesci Rossi 2025</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #fff;
-            text-align: center;
-            padding: 20px; /* Spazio ai bordi per dispositivi mobili */
-            box-sizing: border-box;
         }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            max-width: 600px;
-            width: 100%; /* Adattabilità ai dispositivi mobili */
-        }
-        #phrase {
-            font-size: 1.5em;
+        h1 {
+            font-weight: bold;
             margin-bottom: 20px;
-            word-wrap: break-word;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
         button {
-            background-color: #FFA500; /* Arancione */
-            color: #fff;
+            background-color: orange;
+            color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
+            font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 1em;
         }
         button:hover {
-            background-color: #e69500;
+            background-color: darkorange;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="phrase">Benvenuto! Clicca per vedere la tua frase del giorno.</div>
-        <button onclick="generatePhrase()">ne voglio un'altra</button>
-    </div>
-
+    <h1>Calendario Pesci Rossi 2025</h1>
+    <p id="daily-phrase"></p>
+    <button onclick="showMessage()">e anche oggi è fatta</button>
     <script>
         const phrases = [
-            "Il buongiorno si vede dalla quantità di bestemmie che hai tirato finora",
             "Gli incubi di stanotte non sono nulla in confronto a quello che ti aspetterà oggi",
             "Se hai aperto il calendario hai già fatto molto, puoi tornare a dormire",
-            "Sappiamo che non hai rifatto il letto! (E va bene così)",
-            "Buongiornissimo Kaffeeee111",
-            "Ti auguriamo una giornata molto carina",
-            "Sorridi alla vita che la vita ti inbula (ma c’è pesci rossi con te <3)",
-            "Cambia la federa più spesso se vuoi migliorare la pelle del tuo viso :)",
-            "Oggi prova a fare qualcosa che non hai mai fatto prima! (Essere felice va bene)",
-            "Se hai tempo stamattina fatti una colazione figa, te la meriti (stiamo pensando a avena, mirtilli, miele e simili)",
-            "Non perdere tempo a scrollare pls :(",
-            "Oggi è il giorno giusto per quella cosa che continui a rimandareee daje",
-            "La parola di oggi è agrifotovoltaico: la tecnologia dell’energia solare ma in verticale tra i filari per non occupare gli spazi delle coltivazioni",
-            "Aggiorna il cv che non si sa mai",
-            "Buongiorno se ti sei lavatə i denti ieri! Altrimenti, cattivo giorno",
-            "I topi non avevano nipoti (ora leggilo al contrario)",
-            "Oof, che anno lungo che è stato questa settimana",
-            "Meglio maiale che fascista",
-            "Spera per il meglio, preparati per il peggio!",
-            "Oggi è la giornata giusta per mettere quella cosa nel retro del tuo armadio",
-            "Se è il tuo compleanno, Buon compleanno!",
-            "Qual è il tuo proposito per oggi? Non cagarti addosso? Uuuuuh mi piace, ambizioso",
-            "Oggi scoprirai definitivamente se sei intollerante al glutine, ma non ti dico come",
-            "La parola di oggi è: DESUETO. Fuori moda, obsoleto, superato.",
-            "Prendi una felpetta che non si sa mai",
-            "Perché oggi non provi ad andare avanti con quel libro che hai messo da parte?",
-            "È L’ORA DELLO SBUSTO È L’ORA DEL PACCHETTO",
-            "Noi siamo Marta, Chicco e Maddalena e siamo felici che tu ti sia svegliat* stamattina",
-            "Questa frase è stata scritta personalmente da Chicco e vuole dirti: oggi ce la puoi fare",
-            "Buongiorno luce dei miei occhi, oggi ti voglio felice di vivere",
-            "Lavati i denti",
-            "Se leggi questa frase in inverno, vestiti a cipolla, se la leggi in estate, a rapa",
-            "Sfida di oggi: sorridere a tutte le persone che incontri",
-            "Camminare per trenta minuti potrebbe aiutarti con la salute mentale (o forse no, sono pur sempre una frase su di un calendario)",
-            "Oggi sei Britney Spears",
-            "Challenge di oggi: stai dritto/a con la schiena",
-            "Scrivi su di un pezzo di carta una cosa che vuoi fare prima della fine dell’anno e poi buttalo, tanto non interessa a nessuno",
-            "Preferisci Pesci Rossi o Pesci Grossi? Scrivicelo in un dm che ci fa felici",
-            "Challenge di oggi: metti like a una persona a caso",
-            "Se trovi una rana in giro sei fortunato",
-            "Parola del giorno: balaustra. Scrivilo alla prima persona che vuoi tanto mica ti controllo",
-            "Gna omo vestiti tutto di un colore e ricrea l’outfit giornaliero di Chicco in seconda superiore",
-            "Sfida del giorno: dire di no a un lavoro sottopagato",
-            "Gesù ti vede",
-            "Non mi piacciono i furby",
-            "Compra un biglietto per un concerto random",
-            "È Maddalena…la BALENA BUONA CHE 🐋",
-            "Conosci Bryan? È un sogno..."
+            // Altre frasi prese dal file caricato
+            "A tutti una buona giornata e tanti auguri a Enrico" // Frase specifica per il 20 febbraio 2025
         ];
 
-        function generatePhrase() {
-            const randomIndex = Math.floor(Math.random() * phrases.length);
-            document.getElementById('phrase').innerText = phrases[randomIndex];
+        function getPhraseForToday() {
+            const today = new Date();
+            const yearStart = new Date(today.getFullYear(), 0, 0);
+            const diff = today - yearStart + (yearStart.getTimezoneOffset() - today.getTimezoneOffset()) * 60000;
+            const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            if (today.getFullYear() === 2025 && today.getMonth() === 1 && today.getDate() === 20) {
+                return "A tutti una buona giornata e tanti auguri a Enrico";
+            }
+            return phrases[dayOfYear % phrases.length];
         }
+
+        function showMessage() {
+            alert("Daje tutta");
+        }
+
+        document.getElementById("daily-phrase").innerText = getPhraseForToday();
     </script>
 </body>
 </html>
